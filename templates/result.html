@@ -1,0 +1,114 @@
+<div class="card shadow">
+    <div class="card-header bg-success text-white">
+        <h2 id="analysis-results" class="mb-0">Analysis Results</h2>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-3">
+                    <div class="card-header bg-info text-white">
+                        <h3 id="property-details" class="h5 mb-0">Property Details</h3>
+                    </div>
+
+                    <div class="card-body">
+                        {% if results.key_facts %}
+                        {% for key, value in results.key_facts.items() %}
+                        <strong>{{ key|replace('_', ' ')|title }}:</strong>
+                        {% if value is mapping %}
+                        <ul>
+                            {% for sub_key, sub_value in value.items() %}
+                            <li><strong>{{ sub_key|replace('_', ' ')|title }}:</strong> {{ sub_value }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        {{ value }}
+                        {% endif %}
+                        <br>
+                        {% endfor %}
+                        {% else %}
+                        No property details found
+                        {% endif %}
+                    </div>
+
+                    <div class="card-footer">
+                        Note: <strong>Usable Area</strong> and <strong>Plot Size</strong> are in <strong>m²</strong>.
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header bg-danger text-white">
+                        <h3 id="selected-list" class="h5 mb-0">Selected HubSpot List</h3>
+                    </div>
+
+                    <div class="card-body">
+                        {% if results.selected_list %}
+                        <strong>Selected List:</strong> {{ results.selected_list }}<br>
+                        <strong>List ID:</strong> {{ results.selected_list_id }}<br>
+                        <strong>Contacts:</strong> {{ results.selected_contacts|length }}<br>
+                        <strong>Companies:</strong> {{ results.selected_companies|length }}<br>
+                        <button class="btn btn-primary btn-sm" onclick="copyContent(this)">copy Top 25</button>
+                        <span id="curated-member">{{ results.curated_member }}</span>
+                        <script>
+                            function copyContent(btn) {
+                                const elem = document.querySelector('#curated-member');
+                                const content = elem.textContent.trim();
+
+                                navigator.clipboard.writeText(content).then(() => {
+                                    btn.innerHTML = 'Copied!';
+                                    btn.classList.add('btn-success');
+                                    btn.classList.add('disabled');
+                                    btn.classList.remove('btn-primary');
+
+                                    setTimeout(() => {
+                                        btn.innerHTML = 'Copy';
+                                        btn.classList.remove('btn-success');
+                                        btn.classList.remove('disabled');
+                                        btn.classList.add('btn-primary');
+                                    }, 2000);
+                                });
+                            }
+                        </script>
+                        <table class="table table-light table-hover table-striped table-responsive">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Company</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for company in results.selected_companies %}
+                            <tr>
+                                <th scope="row">{{company.hs_object_id}}</th>
+                                <td>{{company.name}}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                        No list was selected
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header bg-warning text-white">
+                        <h3 id="email" class="h5 mb-0">Email for target audience</h3>
+                    </div>
+
+                    <div class="card-body">
+                        {% if results.email %}
+                        {{ results.email|safe }}
+                        {% else %}
+                        No email was generated
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer text-center">
+        <a href="/" class="btn btn-primary">Analyze Another File</a>
+    </div>
+</div>
