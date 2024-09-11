@@ -47,14 +47,14 @@ class GPTService:
                 "house_number": string,
                 "postal_code": string,
                 "city": string,
-                "population": number (if available)
+                "population": number
             },
-            "purchase_price": string (include currency),
-            "usable_area": number (in square meters),
-            "plot_size": number (in square meters),
-            "residential_units": number (if it's a residential complex),
-            "rental_income": string (include currency and frequency, e.g., "per month"),
-            "wault": number (average remaining term of rental agreements in years)
+            "purchase_price": string,
+            "usable_area": number,
+            "plot_size": number,
+            "residential_units": number,
+            "rental_income": string,
+            "wault": number
         }
         If a piece of information is not available, omit that field from the JSON.
         """
