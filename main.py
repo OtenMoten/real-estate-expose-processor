@@ -1,22 +1,25 @@
 import logging
 from flask import Flask
-
 from config import Config
 from router import create_routes
 
 
-def initialize_app(configuration: Config) -> Flask:
+def create_app(config: Config = None) -> Flask:
+
+    if config is None:
+        config = Config()
+
     flask_instance = Flask(__name__)
-    flask_instance.secret_key = configuration.FLASK_SECRET_KEY
+    flask_instance.secret_key = config.FLASK_SECRET_KEY
 
     logging.basicConfig(level=logging.INFO)
 
-    create_routes(flask_instance, configuration)
+    create_routes(flask_instance, config)
 
     return flask_instance
 
 
+flask_app = create_app()
+
 if __name__ == "__main__":
-    config_instance = Config()
-    flask_app = initialize_app(config_instance)
     flask_app.run(debug=True)

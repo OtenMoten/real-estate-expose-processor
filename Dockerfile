@@ -7,18 +7,22 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Enable useradd
-RUN apk add --no-cache shadow
+# Enable useradd and install debugging tools
+RUN apk add --no-cache shadow tree
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 5000 available to the world outside this container
-EXPOSE 5000
+# Make port 8000 available to the world outside this container
+EXPOSE 8000
 
 # Create a non-root user and switch to it
 RUN useradd -m neo
+RUN chown -R neo:neo /app
 USER neo
 
+# Debug: Print directory contents and file permissions
+RUN echo "Directory contents:" && ls -la /app && echo "File tree:" && tree /app
+
 # Run gunicorn when the container launches
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:flask_app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "main:flask_app"]
