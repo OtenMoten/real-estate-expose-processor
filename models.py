@@ -58,5 +58,5 @@ class TaskResult(BaseModel):
     selected_list_id: Optional[str] = Field(default="")
     selected_contacts: List[Contact] = Field(default_factory=list)
     selected_companies: List[Company] = Field(default_factory=list)
-    curated_member: str = Field(default="error with GPT")
+    curated_member: List[str] = Field(default_factory=list)
     email: Optional[str] = Field(default="")

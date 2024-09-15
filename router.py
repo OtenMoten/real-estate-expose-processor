@@ -1,3 +1,4 @@
+import ast
 import logging
 from typing import List, Tuple
 from flask import Flask, request, jsonify
@@ -75,6 +76,8 @@ class Router:
                 curated_member = self.curate_member(task_id, "; ".join(f"{contact.firstname}{contact.lastname}" for contact in contacts))
             elif len(companies) > 0:
                 curated_member = self.curate_member(task_id, "; ".join(f"{company.name}" for company in companies))
+
+            curated_member = Util.string_to_list(curated_member)
 
             html_email = self.generate_email(task_id, text, selected_list_name)
 

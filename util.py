@@ -35,3 +35,45 @@ class Util:
 
     def extract_text_from_pdf(self, pdf_content: bytes) -> Optional[str]:
         return self.pdf_util.extract_text_from_pdf(pdf_content)
+
+    @staticmethod
+    def string_to_list(input_string):
+        # Check if input is a string
+        if not isinstance(input_string, str):
+            raise TypeError("Input must be a string")
+
+        # Remove leading/trailing whitespace
+        input_string = input_string.strip()
+
+        # Check if the string starts and ends with square brackets
+        if not (input_string.startswith('[') and input_string.endswith(']')):
+            raise ValueError("Input string must start with '[' and end with ']'")
+
+        # Remove the square brackets
+        cleaned_string = input_string[1:-1]
+
+        # Split the string by comma, handling potential nested structures
+        item_list = []
+        current_item = ""
+        nested_level = 0
+
+        for char in cleaned_string:
+            if char == ',' and nested_level == 0:
+                if current_item:
+                    item_list.append(current_item.strip())
+                    current_item = ""
+            else:
+                if char == '(':
+                    nested_level += 1
+                elif char == ')':
+                    nested_level -= 1
+                current_item += char
+
+        # Add the last item if there's any
+        if current_item:
+            item_list.append(current_item.strip())
+
+        # Remove any empty strings from the list
+        item_list = [item for item in item_list if item]
+
+        return item_list
