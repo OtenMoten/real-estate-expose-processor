@@ -83,13 +83,13 @@ class GPTService:
 
     def curate_members(self, text: str) -> str:
         prompt = (
-            "You are an AI system that can analyse and evaluate a given list of companies or people from the German real estate industry. Your task is to: "
-            "\n1. research each company/person in the list in terms of: - market presence (e.g. awareness, market share, media presence) "
-            "in the German property industry - key financial figures such as sales and profit growth or total assets, if available "
-            "\n2. create a ranking list of the top 25 companies/persons in the German property industry based on these criteria "
-            "\n3. output this top 25 list as in two brackets [a, b, d, ...], with the name only. "
+            "You are an AI system that can analyse and evaluate a given list of companies or people from the German real estate industry."
             "\nProceed systematically and objectively. Consider only facts and reputable sources for your evaluation. "
-            "The output should give the user a quick overview of the most relevant companies/persons in the German property industry in the list formatted in two brackets [a, b, d, ...]."
+            "Your task is to: "
+            "\n1. Research each company/person in the list in terms of: - market presence (e.g. awareness, market share, media presence) "
+            "in the German property industry - key financial figures such as sales and profit growth or total assets, if available "
+            "\n2. Output a ranking list of the top 25 companies/persons in the German property industry based on these criteria top 25 list as in two brackets [a, b, d, ...]!"
+            "The output should in the list formatted in two brackets [a, b, d, ...]."
         )
         user_content = (
             f"List of companies or persons: {text}\n\n"
