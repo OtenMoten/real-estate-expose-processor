@@ -89,12 +89,12 @@ class GPTService:
             "\n2. create a ranking list of the top 25 companies/persons in the German property industry based on these criteria "
             "\n3. output this top 25 list as in two brackets [a, b, d, ...], with the name only. "
             "\nProceed systematically and objectively. Consider only facts and reputable sources for your evaluation. "
-            "The output should give the user a quick overview of the most relevant companies/persons in the German property industry in the list."
+            "The output should give the user a quick overview of the most relevant companies/persons in the German property industry in the list formatted in two brackets [a, b, d, ...]."
         )
         user_content = (
             f"List of companies or persons: {text}\n\n"
-            "Please analyze the list and return the top 25 performer! "
-            "Important note: Respond in list as in two brackets [a, b, d, ...], with the name only "
+            "Please analyze the list and return the top 25 performer in two brackets [a, b, d, ...]! "
+            "Important note: Respond in list as in two brackets [a, b, d, ...] "
             "(do not write custom style tags) and without markdown tags/syntax (not beginning with ```json/html/or any other tag)!"
         )
         return self._make_openai_request(prompt, user_content)
