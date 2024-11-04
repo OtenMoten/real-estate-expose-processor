@@ -88,13 +88,13 @@ class GPTService:
             "Your task is to: "
             "\n1. Research each company/person in the list in terms of: - market presence (e.g. awareness, market share, media presence) "
             "in the German property industry - key financial figures such as sales and profit growth or total assets, if available "
-            "\n2. Output a ranking list of the top 25 companies/persons in the German property industry based on these criteria top 25 list as in two brackets [a, b, d, ...]!"
-            "The output should in the list formatted in two brackets [a, b, d, ...]."
+            "\n2. Output top 25 list as in two brackets [a, b, d, ...] only without any other text, you message must start with '[' and and with ']'!"
+            "The output should in the list formatted in two brackets [a, b, d, ...] only without any other text, you message must start with '[' and and with ']'."
         )
         user_content = (
             f"List of companies or persons: {text}\n\n"
-            "Please analyze the list and return the top 25 performer in two brackets [a, b, d, ...]! "
-            "Important note: Respond in list as in two brackets [a, b, d, ...] "
+            "Please analyze the list and return the top 25 performer in two brackets [a, b, d, ...] only without any other text, you message must start with '[' and and with ']'! "
+            "Important note: Respond in list as in two brackets [a, b, d, ...] only without any other text, you message must start with '[' and and with ']' "
             "(do not write custom style tags) and without markdown tags/syntax (not beginning with ```json/html/or any other tag)!"
         )
         return self._make_openai_request(prompt, user_content)
