@@ -127,9 +127,9 @@ class Router:
 
     def curate_member(self, task_id: str, text: str) -> str:
         self.task_manager.update_progress(task_id, "Curating top 25 performer ...", 80)
-        html_email = self.gpt_service.curate_members(text)
+        members = self.gpt_service.curate_members(text)
 
-        return html_email
+        return members
 
     def generate_email(self, task_id: str, text: str, selected_list_name: str) -> str:
         self.task_manager.update_progress(task_id, "Generating email with GPT ...", 90)
