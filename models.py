@@ -30,21 +30,22 @@ class ListInfo(BaseModel):
 
 
 class Address(BaseModel):
-    street: Optional[str] = Field(default="not in PDF or GPT is lazy.")
-    house_number: Optional[str | int] = Field(default="not in PDF or GPT is lazy.")
-    postal_code: Optional[str | int] = Field(default="not in PDF or GPT is lazy.")
-    city: Optional[str] = Field(default="not in PDF or GPT is lazy.")
-    population: Optional[int | str] = Field(default="not in PDF or GPT is lazy.")
+    street: Optional[str] = Field(default="missing")
+    house_number: Optional[str | int] = Field(default="missing")
+    postal_code: Optional[str | int] = Field(default="missing")
+    city: Optional[str] = Field(default="missing")
+    population: Optional[int | str] = Field(default="missing")
 
 
 class KeyFacts(BaseModel):
     address: Address = Field(default_factory=Address)
-    purchase_price: Optional[int | float | str] = Field(default="not in PDF or GPT is lazy.")
-    usable_area: Optional[int | float | str] = Field(default="not in PDF or GPT is lazy.")
-    plot_size: Optional[int | float | str] = Field(default="not in PDF or GPT is lazy.")
-    residential_units: Optional[int | float | str] = Field(default="not in PDF or GPT is lazy.")
-    rental_income: Optional[int | float | str] = Field(default="not in PDF or GPT is lazy.")
-    wault: Optional[int | float | str] = Field(default="not in PDF or GPT is lazy.")
+    purchase_price: Optional[int | float | str] = Field(default="missing")
+    price_per_square: Optional[int | float | str] = Field(default="missing")
+    usable_area: Optional[int | float | str] = Field(default="missing")
+    plot_size: Optional[int | float | str] = Field(default="missing")
+    residential_units: Optional[int | float | str] = Field(default="missing")
+    rental_income: Optional[int | float | str] = Field(default="missing")
+    wault: Optional[int | float | str] = Field(default="missing")
 
 
 class TaskProgress(BaseModel):

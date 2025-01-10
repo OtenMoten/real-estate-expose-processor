@@ -91,7 +91,11 @@ class Router:
                 curated_member=curated_member,
                 email=html_email
             )
+
+            print(task_result.curated_member)
+
             self.task_manager.set_results(task_id, task_result.model_dump())
+
         except Exception as e:
             logger.error(f"Error processing PDF: {str(e)}")
             self.task_manager.update_progress(task_id, f"Error: {str(e)}", 100)
